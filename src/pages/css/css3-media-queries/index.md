@@ -54,7 +54,7 @@ The `p` tag will have a padding of 30px as soon as the screen reaches min 768px 
 
 There are more operators beyond the main two, a full list with examples can be found [https://css-tricks.com/logic-in-media-queries/](in this article from CSS Tricks.)
 
-Beyond the core uses of media queries for mobile-first web design shown above, media queries can do a lot, especially for web accessibility.
+Beyond the core uses of media queries for mobile-first web design shown above, media queries can do a lot, especially for web accessibility. Here are just a few examples:
 
 1. Adjusting for screen readers that convert website text to speech for the visually impaired (for example, ignoring non-essential text)
 ```css
