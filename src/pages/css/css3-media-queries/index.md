@@ -3,63 +3,58 @@ title: CSS3 Media Queries
 ---
 ## CSS3 Media Queries
 
-CSS3 Media queries are a relatively new feature, added as a recommended standard by the <a href='https://en.wikipedia.org/wiki/World_Wide_Web_Consortium#Specification_maturation' target='_blank' rel='nofollow'>World Wide Web Consortium (W3C)</a> in June 2012. It is core to the very possibility of responsive web design, because it is media queries that allow a site's CSS styling to respond and adapt based on the device viewing it.
+Media Queries allow you to have different styles for different devices/screen sizes. Their introduction in CSS3 has greatly eased the building
+of responsive webpages.
 
-### Why Media Queries?
+The best approach when designing a responsive website is to think mobile first; meaning that you create your page starting with the design and content
+of the mobile version. You may think that with some scalable sizes ( %, vw or vh ), your page will adapt perfectly to any device. But it will not. Maybe
+for some very basic design, but certainly not for more common or complex pages!
 
-Media queries allow a specific style or set of styles to be applied only when a specific attribute is true of the device accessing the website. They can be used to make sites look and respond much better on both mobile and desktop devices, for example, but they can also change certain attributes for things as diverse as:
+When designing your page for smaller devices, you will focus on the main content. On a bigger screen, you will have to readapt some font-sizes, margins,
+paddings and so on in order to keep your site comfortable and readable, but you will also want/need to add more content, the ones you did not judge
+fundamental, and fill in the space created by the screen size.
 
-1. Adjusting for screen readers that convert website text to speech for the visually impaired
-2. Restyling a page for when it's printed as opposed to read on a screen
-3. Resizing for different aspect ratios
-4. Letting content determine break points
-5. Allowing for more graceful zooming in for the minorly visually impaired
-6. And of course, accomodating various screen heights and widths
+The thought process should be:
+1. Which content to show?
+2. How to layout?
+3. Size?
 
-### How to use them
+### The basic syntax
 
-Using media queries you target a specific type or feature of the medium (i.e. the device or means by which they are seeing the site). 
-
-Type includes options like projection, TV, and speech (for text-to-speech devices). The most common types are `screen`, which targets any device with a screen, and `print`, for when a website is printed out. A type is targeted thus:
-
-```CSS
-@media print { ... }
+```css
+    @media only screen and (min-width: 768px) {
+      p {padding: 30px;}
+    }
 ```
 
-Media queries can also indicate specific features of devices, using common CSS selectors. For example, the following code block would only apply to devices that have a screen width of no more than 1400px:
+The `p` tag will have a padding of 30px as soon as the screen reaches min 768px width.</p>
 
-```CSS
-@media (max-width: 1400px) { ... }
+### The AND syntax
+
+
+```css
+  @media only screen and (min-height: 768px) and (orientation: landscape) {
+    p {padding: 30px;}
+  }
 ```
 
-Media queries can also target specific states, such as hover or focus, using the same syntax. Additionally, media queries can be more specifically targeted using the logical operators `and` and `not`:
+The `p` tag will have a padding of 30px as soon as the screen reaches min 768px height and its orientation is landscape.
 
-```CSS
-@media (min-width: 30em) and (hover: hover)
+### The OR syntax
+
+```css
+    @media only screen and (min-width: 768px), (min-resolution: 150dpi) {
+      p {padding: 30px;}
+    }
 ```
 
-Using these logical operators chain using mathematical kinds of order of operations, so if using multiple operators double check to make sure that the style is being applied in the expected and intended way. For example: 
+The `p` tag will have a padding of 30px as soon as the screen reaches min 768px width or its resolution reaches min 150dpi.
 
-```CSS
-@media not all and (max-width: 600px)
-```
-
-This would be evaluated as `not (all and (max-width: 600px))`, not as `(not all) and (max-width: 600px)`. Some users have reported that it can be difficult to get `not` to work by itself without using an accompanying `all and`, basically following the above pattern: `all and (your-selector: value)`.
-
-You can also create styles that will be applied similar to a classic `or` operator using comma separated lists. The style will applied if any of the listed criteria are met:
-
-```CSS
-@media (min-height: 680px), (orientation: portrait) { ... }
-```
-
-This style would be applied if either the screen had a minimum height of 680px or it was in portrait orientation. When comma chaining with `not`, note that the `not` operator will only negate items in it's own element of the list, not the list as a whole.
-
-Finally, the `only` operator is purely used for protection against older browsers that have not implemented media queries. It will prevent these browsers from applying media-query specific styles. It has no effect on any modern browser. Media queries are supported in Internet Explorer (IE) 9+, Firefox 3.5+, Safari 3+, Opera 7+, and also in smartphones and screen devices.
-
-#### More Information:
-<a href='https://en.wikipedia.org/wiki/Media_queries' target='_blank' rel='nofollow'>Wikipedia Entry on Media Queries</a>
-<a href='https://en.wikipedia.org/wiki/Media_queries' target='_blank' rel='nofollow'>MDN Docs on Media Queries</a>
-<a href='https://www.w3schools.com/cssref/css3_pr_mediaquery.asp' target='_blank' rel='nofollow'>W3 Schools Docs on Media Queries</a>
-<a href='http://bradfrost.com/blog/post/7-habits-of-highly-effective-media-queries/' target='_blank' rel='nofollow'>A good blog post by Brad Frost about best practices</a>
-<a href='https://css-tricks.com/logic-in-media-queries/' target='_blank' rel='nofollow'>A blog post from CSS tricks about media query logic</a>
-<a href='https://www.templatemonster.com/blog/css-media-queries-for-all-devices-and-browsers-including-ie7-and-ie8/' target='_blank' rel='nofollow'>A blog post about media query browser support</a>
+### More Information
+* [MDN - media queries](https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries)
+* [W3 Schools - @media rule](https://www.w3schools.com/cssref/css3_pr_mediaquery.asp)
+* [CSS Tricks Standard Device Widths Atricle](https://css-tricks.com/snippets/css/media-queries-for-standard-devices/)
+* [https://alistapart.com/article/responsive-web-design](Ethan Marcotte A List Apart Atricle on  Responsive Web Design)
+* [https://css-tricks.com/logic-in-media-queries/](CSS Tricks More Media Query Logical Operators You Can Use)
+* [http://bradfrost.com/blog/post/7-habits-of-highly-effective-media-queries/](Brad Frost 7 habits of highly effective media queries)
+* [https://www.templatemonster.com/blog/css-media-queries-for-all-devices-and-browsers-including-ie7-and-ie8/](How to make media queries work on older browsers)
